@@ -21,11 +21,9 @@ public class PruferCode {
     
     //
     private TreeNode buildTree() {
-        int maxLabel = Collections.max(code) + 1;
+        int n = code.size() + 1;
         ListIterator<Integer> codeIterator = code.listIterator();
-        ArrayList<Boolean> visited = new ArrayList<>(
-            Collections.nCopies(maxLabel + 1, false)
-        );
+        ArrayList<Boolean> visited = new ArrayList<>(Collections.nCopies(n + 1, false));
         
         int label = codeIterator.next();
         TreeNode root = new TreeNode(label, null, null);
@@ -35,11 +33,6 @@ public class PruferCode {
         while (codeIterator.hasNext()) {
             int next = codeIterator.next();
             label = visited.get(next) ? visited.indexOf(false) : next;
-            
-            if (label == maxLabel) {
-                visited.add(false);
-                maxLabel++;
-            }
             
             TreeNode child = new TreeNode(label, root, node);
             node.addChild(child);
